@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; media-src *; img-src 'self' data: content:; connect-src * 'self' https://*.katgamind.or.id;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>BankKrut - Internet Banking</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>BankKrut</span>
+            </div>
+            <div class="header-right">
+                <div class="clock" id="clock"></div>
+                <div class="profile-dropdown">
+                    <button class="profile-btn" onclick="toggleProfileDropdown()">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">User</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </button>
+                    <div class="profile-menu" id="profileMenu">
+                        <div class="profile-menu-header">
+                            <i class="fas fa-user-circle"></i>
+                            <div class="profile-info">
+                                <div class="profile-name" id="profileName">User</div>
+                                <div class="profile-account" id="profileAccount">Rek: -</div>
+                            </div>
+                        </div>
+                        <div class="profile-menu-divider"></div>
+                        <a href="#" class="profile-menu-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Keluar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <nav class="menu">
+                <a href="#" class="menu-item active" data-page="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="menu-item" data-page="saldo">
+                    <i class="fas fa-wallet"></i>
+                    <span>Lihat Saldo</span>
+                </a>
+                <a href="#" class="menu-item" data-page="histori">
+                    <i class="fas fa-history"></i>
+                    <span>Histori Transaksi</span>
+                </a>
+                <a href="#" class="menu-item" data-page="mutasi">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Mutasi Rekening</span>
+                </a>
+                <a href="#" class="menu-item" data-page="transfer-online">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Transfer Online</span>
+                </a>
+                <a href="#" class="menu-item" data-page="transfer-overbooking">
+                    <i class="fas fa-random"></i>
+                    <span>Transfer Overbooking</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div id="dashboard" class="page active">
+                <h1 class="page-title">Dashboard</h1>
+                <div class="dashboard-grid">
+                    <div class="card balance-card">
+                        <div class="card-header">
+                            <i class="fas fa-wallet"></i>
+                            <h3>Saldo Rekening</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="account-number">Rek: <span id="dashAccountNumber"></span></div>
+                            <div class="balance-amount" id="dashBalance">Rp 0</div>
+                        </div>
+                    </div>
+
+                    <div class="card info-card">
+                        <div class="card-header">
+                            <i class="fas fa-user"></i>
+                            <h3>Informasi Akun</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-item">
+                                <span class="info-label">Nama:</span>
+                                <span class="info-value" id="dashUserName"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Nomor Rekening:</span>
+                                <span class="info-value" id="dashAccountNum"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Jenis Akun:</span>
+                                <span class="info-value">Tabungan</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card recent-card">
+                        <div class="card-header">
+                            <i class="fas fa-clock"></i>
+                            <h3>Transaksi Terakhir</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="recentTransactions"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="saldo" class="page">
+                <h1 class="page-title">Informasi Saldo</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="saldo-display">
+                            <div class="saldo-info">
+                                <p class="saldo-label">Nomor Rekening</p>
+                                <p class="saldo-value" id="saldoAccountNumber"></p>
+                            </div>
+                            <div class="saldo-info">
+                                <p class="saldo-label">Nama Pemilik</p>
+                                <p class="saldo-value" id="saldoUserName"></p>
+                            </div>
+                            <div class="saldo-info main-balance">
+                                <p class="saldo-label">Saldo Tersedia</p>
+                                <p class="saldo-value balance-large" id="saldoBalance"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="histori" class="page">
+                <h1 class="page-title">Histori Transaksi</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="filter-section">
+                            <div class="filter-group">
+                                <label>Dari Tanggal:</label>
+                                <input type="date" id="historiStartDate" class="input-field" title="Pilih tanggal mulai untuk filter histori transaksi">
+                            </div>
+                            <div class="filter-group">
+                                <label>Sampai Tanggal:</label>
+                                <input type="date" id="historiEndDate" class="input-field" title="Pilih tanggal akhir untuk filter histori transaksi">
+                            </div>
+                            <div class="filter-group">
+                                <label>Tipe:</label>
+                                <select id="historiType" class="input-field" title="Pilih tipe transaksi untuk filter histori">
+                                    <option value="all">Semua</option>
+                                    <option value="credit">Kredit</option>
+                                    <option value="debit">Debit</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" onclick="filterHistori()">
+                                <i class="fas fa-filter"></i> Filter
+                            </button>
+                        </div>
+                        <div class="table-container">
+                            <table class="transaction-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Keterangan</th>
+                                        <th>Tipe</th>
+                                        <th>Jumlah</th>
+                                        <th>Saldo</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historiTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mutasi" class="page">
+                <h1 class="page-title">Mutasi Rekening</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="filter-section">
+                            <div class="filter-group">
+                                <label>Dari Tanggal:</label>
+                                <input type="date" id="mutasiStartDate" class="input-field" title="Pilih tanggal mulai untuk filter mutasi rekening">
+                            </div>
+                            <div class="filter-group">
+                                <label>Sampai Tanggal:</label>
+                                <input type="date" id="mutasiEndDate" class="input-field" title="Pilih tanggal akhir untuk filter mutasi rekening">
+                            </div>
+                            <button class="btn btn-primary" onclick="filterMutasi()">
+                                <i class="fas fa-filter"></i> Filter
+                            </button>
+                        </div>
+                        <div class="table-container">
+                            <table class="transaction-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Keterangan</th>
+                                        <th>Debit</th>
+                                        <th>Kredit</th>
+                                        <th>Saldo</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mutasiTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="transfer-online" class="page">
+                <h1 class="page-title">Transfer Online (Antar Bank)</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="info-box warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Transfer ke bank lain memerlukan biaya admin Rp 6.500</p>
+                        </div>
+                        <form id="transferOnlineForm" class="transfer-form">
+                            <div class="form-group">
+                                <label>Bank Tujuan</label>
+                                <select class="input-field" id="bankTujuan" required title="Pilih bank tujuan untuk transfer">
+                                    <option value="">-- Pilih Bank --</option>
+                                    <optgroup label="Bank Pemerintah">
+                                        <option value="BRI">🏦 Bank BRI</option>
+                                        <option value="BNI">🏦 Bank BNI</option>
+                                        <option value="Mandiri">🏦 Bank Mandiri</option>
+                                        <option value="BTN">🏦 Bank BTN</option>
+                                    </optgroup>
+                                    <optgroup label="Bank Swasta">
+                                        <option value="BCA">🏛️ Bank BCA</option>
+                                        <option value="CIMB">🏛️ Bank CIMB Niaga</option>
+                                        <option value="Danamon">🏛️ Bank Danamon</option>
+                                        <option value="Permata">🏛️ Bank Permata</option>
+                                        <option value="Panin">🏛️ Bank Panin</option>
+                                        <option value="OCBC">🏛️ Bank OCBC NISP</option>
+                                        <option value="Mega">🏛️ Bank Mega</option>
+                                        <option value="Bukopin">🏛️ Bank Bukopin</option>
+                                    </optgroup>
+                                    <optgroup label="Bank Syariah">
+                                        <option value="BSI">🕌 Bank Syariah Indonesia</option>
+                                        <option value="Muamalat">🕌 Bank Muamalat</option>
+                                    </optgroup>
+                                    <optgroup label="Bank Digital">
+                                        <option value="Jago">📱 Bank Jago</option>
+                                        <option value="Seabank">📱 SeaBank</option>
+                                        <option value="Neo">📱 Bank Neo Commerce</option>
+                                        <option value="Blu">📱 Blu by BCA Digital</option>
+                                        <option value="Line">📱 LINE Bank</option>
+                                        <option value="Superbank">📱 Superbank</option>
+                                    </optgroup>
+                                    <optgroup label="E-Wallet">
+                                        <option value="OVO">💳 OVO</option>
+                                        <option value="DANA">💳 DANA</option>
+                                        <option value="GoPay">💳 GoPay</option>
+                                        <option value="ShopeePay">💳 ShopeePay</option>
+                                        <option value="LinkAja">💳 LinkAja</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nomor Rekening Tujuan</label>
+                                <input type="text" class="input-field" id="rekeningTujuan" required placeholder="Masukkan nomor rekening">
+                            </div>
+                            <div class="form-group">
+                                <label>Jumlah Transfer</label>
+                                <input type="number" class="input-field" id="jumlahTransfer" required placeholder="0" min="10000">
+                                <small class="input-hint">Minimal transfer Rp 10.000</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Keterangan (Opsional)</label>
+                                <textarea class="input-field" id="keteranganTransfer" rows="2" placeholder="Contoh: Bayar tagihan, dll"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Kirim Transfer
+                                </button>
+                                <button type="reset" class="btn btn-secondary">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="transfer-overbooking" class="page">
+                <h1 class="page-title">Transfer Overbooking</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="info-box">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Transfer Overbooking adalah transfer antar rekening dalam bank yang sama (BankKrut) - <strong>GRATIS</strong> biaya admin</p>
+                        </div>
+                        <form id="transferOverbookingForm" class="transfer-form">
+                            <div class="form-group">
+                                <label>Nomor Rekening Tujuan (Sesama BankKrut)</label>
+                                <input type="text" class="input-field" id="rekeningOverbooking" required placeholder="Masukkan nomor rekening BankKrut">
+                            </div>
+                            <div class="form-group">
+                                <label>Jumlah Transfer</label>
+                                <input type="number" class="input-field" id="jumlahOverbooking" required placeholder="0" min="1000">
+                                <small class="input-hint">Minimal transfer Rp 1.000</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Keterangan (Opsional)</label>
+                                <textarea class="input-field" id="keteranganOverbooking" rows="2" placeholder="Contoh: Pinjam uang, dll"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Kirim Transfer
+                                </button>
+                                <button type="reset" class="btn btn-secondary">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 BankKrut. All rights reserved.</p>
+    </div>
+
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Konfirmasi Transfer</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                <button class="btn btn-primary" onclick="confirmTransfer()">Konfirmasi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cordova Script HARUS dimuat pertama -->
+    <script src="cordova.js"></script>
+    
+    <!-- Core Modules -->
+    <script src="js/core/config.js"></script>
+    <script src="js/core/utils.js"></script>
+    <script src="js/core/state.js"></script>
+    
+    <!-- Middleware -->
+    <script src="js/middleware/mock.js"></script>
+    <script src="js/middleware/http.js"></script>
+    <script src="js/middleware/response.js"></script>
+    <script src="js/middleware/validator.js"></script>
+    
+    <!-- Services -->
+    <script src="js/services/auth.js"></script>
+    <script src="js/services/account.js"></script>
+    <script src="js/services/transfer.js"></script>
+    <script src="js/services/transaction.js"></script>
+    
+    <!-- UI Controllers -->
+    <script src="js/ui/view.js"></script>
+    <script src="js/ui/modal.js"></script>
+    <script src="js/ui/navigation.js"></script>
+    
+    <!-- Main App -->
+    <script src="js/app.js"></script>
+</body>
+</html>

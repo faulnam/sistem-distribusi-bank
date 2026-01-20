@@ -1,0 +1,16 @@
+CARA CEPAT FIX ICON:
+
+1. Buat file PNG sederhana (minimal 512x512 px)
+2. Simpan sebagai: www\img\logo.png
+3. Rebuild: .\fix-poco.ps1
+
+ATAU gunakan online tool:
+1. Buka: https://www.favicon-generator.org/
+2. Upload gambar atau buat icon
+3. Download PNG size 512x512
+4. Rename jadi logo.png
+5. Copy ke: www\img\logo.png
+6. Rebuild: .\fix-poco.ps1
+
+ATAU coba script:
+.\create-icon.ps1

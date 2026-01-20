@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Test Mock API</title>
+</head>
+<body>
+    <h1>Test Mock API</h1>
+    <div id="result">Loading...</div>
+    
+    <script src="js/core/config.js"></script>
+    <script src="js/core/utils.js"></script>
+    <script src="js/core/state.js"></script>
+    <script src="js/middleware/mock.js"></script>
+    <script src="js/middleware/http.js"></script>
+    <script src="js/middleware/response.js"></script>
+    
+    <script>
+        console.log('Config.USE_MOCK:', Config.USE_MOCK);
+        console.log('MockAPI exists:', typeof MockAPI !== 'undefined');
+        
+        async function test() {
+            try {
+                const result = await HttpClient.get('/api/saldo/1001');
+                document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+                console.log('Result:', result);
+            } catch (e) {
+                document.getElementById('result').innerHTML = 'Error: ' + e.message;
+                console.error('Error:', e);
+            }
+        }
+        
+        test();
+    </script>
+</body>
+</html>

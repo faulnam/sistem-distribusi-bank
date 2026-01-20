@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.fauls.minibank" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Mini Bank</name>
+    <description>
+        Aplikasi Internet Banking BankKrut - Kelola rekening Anda dengan mudah
+    </description>
+    <author email="dev@bankrut.com" href="https://bankrut.com">
+        BankKrut Development Team
+    </author>
+    <content src="index.html" />
+    
+    <!-- Allow access to external resources -->
+    <access origin="*" />
+    
+<allow-navigation href="http://*/*" />
+
+<allow-intent href="http://*/*" />
+
+    
+    <!-- Android specific settings -->
+    <platform name="android">
+        <allow-intent href="market:*" />
+        
+        <!-- Permissions untuk MIUI -->
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        </config-file>
+        
+        <!-- App icons -->
+        <icon density="ldpi" src="www/img/logo.png" />
+        <icon density="mdpi" src="www/img/logo.png" />
+        <icon density="hdpi" src="www/img/logo.png" />
+        <icon density="xhdpi" src="www/img/logo.png" />
+        <icon density="xxhdpi" src="www/img/logo.png" />
+        <icon density="xxxhdpi" src="www/img/logo.png" />
+        
+        <!-- Preferences -->
+        <preference name="android-minSdkVersion" value="24" />
+        <preference name="android-targetSdkVersion" value="33" />
+        <preference name="android-compileSdkVersion" value="33" />
+        <preference name="Orientation" value="portrait" />
+        <preference name="AndroidInsecureFileModeEnabled" value="true" />
+        <preference name="AndroidLaunchMode" value="singleTop" />
+        <preference name="loadUrlTimeoutValue" value="700000" />
+    </platform>
+    
+    <!-- Global preferences -->
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackgroundColor" value="#FFFFFFFF" />
+    <preference name="HideKeyboardFormAccessoryBar" value="false" />
+    <preference name="Fullscreen" value="false" />
+    
+    
+</widget>
