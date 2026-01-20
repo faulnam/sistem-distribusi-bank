@@ -118,8 +118,7 @@ JWT_EXPIRES_IN=24h
 ### Terminal 1 — Jalankan Backend
 
 ```bash
-cd server
-node index.js
+cd server; node index.js
 ```
 
 ### Terminal 2 — Jalankan Cordova
