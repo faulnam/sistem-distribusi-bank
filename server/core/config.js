@@ -18,7 +18,7 @@ export const Config = {
         ANTAR_BANK: 'LAYANANB'
     },
     
-    MIN_TRANSFER: 10000,
+    MIN_TRANSFER: 1000,
     MAX_TRANSFER: 50000000
 };
 

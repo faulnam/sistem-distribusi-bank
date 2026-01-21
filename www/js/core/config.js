@@ -36,7 +36,7 @@ const Config = {
     },
     
     // Minimum Transfer Amount
-    MIN_TRANSFER: 10000,
+    MIN_TRANSFER: 1000,
     
     // Request Timeout (ms)
     REQUEST_TIMEOUT: 30000,
