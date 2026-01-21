@@ -50,19 +50,18 @@ const TransferService = {
     },
     
     /**
-     * Prepare transfer online (antar bank)
+     * Prepare transfer online
      * @param {Object} formData - Form data
      * @returns {Object} - Prepared transfer data
      */
     prepareTransferOnline(formData) {
         return {
             type: 'online',
-            bank: formData.bank,
             rekening: Validator.sanitize(formData.rekening),
             jumlah: Validator.parseAmount(formData.jumlah),
             keterangan: Validator.sanitize(formData.keterangan) || '-',
-            layanan: Config.LAYANAN.ANTAR_BANK,
-            biayaAdmin: 6500 // Biaya admin antar bank
+            layanan: Config.LAYANAN.SESAMA_BANK,
+            biayaAdmin: 0
         };
     },
     
@@ -78,7 +77,7 @@ const TransferService = {
             jumlah: Validator.parseAmount(formData.jumlah),
             keterangan: Validator.sanitize(formData.keterangan) || '-',
             layanan: Config.LAYANAN.SESAMA_BANK,
-            biayaAdmin: 0 // GRATIS sesama bank
+            biayaAdmin: 0
         };
     }
 };

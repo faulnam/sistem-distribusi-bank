@@ -166,7 +166,6 @@ function setupEventListeners() {
  */
 function handleTransferOnline() {
     const formData = {
-        bank: Utils.$('bankTujuan')?.value,
         rekening: Utils.$('rekeningTujuan')?.value,
         jumlah: Utils.$('jumlahTransfer')?.value,
         keterangan: Utils.$('keteranganTransfer')?.value || '-'

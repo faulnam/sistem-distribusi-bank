@@ -18,24 +18,13 @@ const Validator = {
             errors.push('Nomor rekening tidak valid (4-20 digit angka)');
         }
         
-        // Validasi bank untuk transfer online
-        if (data.type === 'online' && (!data.bank || data.bank === '')) {
-            errors.push('Pilih bank tujuan');
-        }
-        
-        // Hitung total dengan biaya admin
-        const biayaAdmin = data.biayaAdmin || 0;
-        const totalTransfer = data.jumlah + biayaAdmin;
-        
         // Validasi jumlah
         if (!data.jumlah || isNaN(data.jumlah)) {
             errors.push('Jumlah transfer harus diisi');
-        } else if (data.type === 'online' && data.jumlah < 10000) {
-            errors.push('Minimal transfer antar bank Rp 10.000');
-        } else if (data.type === 'overbooking' && data.jumlah < 1000) {
-            errors.push('Minimal transfer sesama bank Rp 1.000');
-        } else if (totalTransfer > AppState.user.balance) {
-            errors.push(`Saldo tidak mencukupi (Total: ${Utils.formatCurrency(totalTransfer)} termasuk biaya admin)`);
+        } else if (data.jumlah < 1000) {
+            errors.push('Minimal transfer Rp 1.000');
+        } else if (data.jumlah > AppState.user.balance) {
+            errors.push('Saldo tidak mencukupi');
         }
         
         // Validasi transfer ke diri sendiri
